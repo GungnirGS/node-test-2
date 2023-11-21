@@ -1,5 +1,6 @@
 require("dotenv").config(); // For reading .env
 const express = require("express"); // Express js
+const axios = require("axios") // For HTTP requests
 const crypto = require("crypto")
 
 const app = express();
@@ -16,6 +17,23 @@ app.get("/endpoint1", async (req, res) => {
     return res.status(400).send("Error occured!");
   }
 });
+
+app.get("/endpoint2", async (req, res) => {
+  try {
+    // send request to endpoint 1
+    const response = await axios.get("http://localhost:8081/endpoint1");
+    const lastChar = response.data.charAt(response.data.length - 1)
+    // check if last character is a number and if it is odd number
+    if (lastChar >= "0" && lastChar <= "9" && Number(lastChar) % 2 === 1) {
+      return res.status(201).json(response.data);
+    }
+    return res.status(400).send("Pass!");
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Error occured!");
+  }
+});
+
 
 // Host the app on port
 const server = app.listen(process.env.PORT, function () {
