@@ -22,6 +22,7 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
-    semi: 'off'
+    semi: 'off',
+    quotes: 'off'
   }
 }
