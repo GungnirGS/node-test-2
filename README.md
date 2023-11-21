@@ -54,6 +54,10 @@ http://localhost:8081/endpoint3
 1. Question 1
 
 ![Question 1](question1.png)
+
 2. Question 2
 
+![Question 2](question2a.png)
+![Question 2](question2b.png)
+![Question 2](question2c.png)
 ![Question 2](question2.png)
