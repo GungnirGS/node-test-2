@@ -34,6 +34,21 @@ app.get("/endpoint2", async (req, res) => {
   }
 });
 
+app.get("/endpoint3", async (req, res) => {
+  try {
+    // loop for sending request
+    while (true) {
+      // wait 1 second
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      // send request to endpoint2 and continue, don't await so to make sure 1 request is sent (almost) every second
+      // callback funtion will handle the response
+      axios.get("http://localhost:8081/endpoint2").then((response) => console.log(response.data)).catch((error) => console.log("Pass!"));
+    }
+  } catch (err) {
+    console.log(err);
+    return res.status(400).send("Error occured!");
+  }
+});
 
 // Host the app on port
 const server = app.listen(process.env.PORT, function () {
